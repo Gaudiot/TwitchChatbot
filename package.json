@@ -1,0 +1,22 @@
+{
+  "name": "twitchchatbot",
+  "version": "1.0.0",
+  "description": "a chatbot for my personal twitch channel",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gaudiot/TwitchChatbot.git"
+  },
+  "author": "gaudiot",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Gaudiot/TwitchChatbot/issues"
+  },
+  "homepage": "https://github.com/Gaudiot/TwitchChatbot#readme",
+  "dependencies": {
+    "tmi.js": "^1.8.5"
+  }
+}
