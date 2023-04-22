@@ -1,10 +1,12 @@
 const tmi = require('tmi.js')
+require('dotenv').config();
+require('dotenv-defaults').config();
 
 // Define configuration options
 const opts = {
   identity: {
-    username: 'gaudiot',
-    password: 'oauth:mp7c39nr7n7cpnr66ncbsl3w81f2c3'
+    username: process.env.USERNAME,
+    password: process.env.AUTH_TOKEN
   },
   channels: [
     'gaudiot'
