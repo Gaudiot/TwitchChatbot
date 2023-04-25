@@ -1,20 +1,9 @@
-const tmi = require('tmi.js')
-require('dotenv').config();
-require('dotenv-defaults').config();
-
-// Define configuration options
-const opts = {
-  identity: {
-    username: process.env.USERNAME,
-    password: process.env.AUTH_TOKEN
-  },
-  channels: [
-    'gaudiot'
-  ]
-};
+import 'dotenv/config'
+import 'dotenv-defaults/config.js'
+import connect from './connect.js';
 
 // Create a client with our options
-const client = new tmi.client(opts);
+const client = await connect();
 
 // Register our event handlers (defined below)
 client.on('message', onMessageHandler);
