@@ -24,11 +24,11 @@ const connect = async () => {
     // Define configuration options
     const opts = {
         identity: {
-        username: process.env.USERNAME,
-        password: process.env.AUTH_TOKEN
+            username: process.env.USERNAME,
+            password: process.env.AUTH_TOKEN
         },
         channels: [
-        'gaudiot'
+            'gaudiot'
         ]
     };
 

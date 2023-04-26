@@ -1,29 +1,14 @@
 
-#  TwitchChatbot
-
-  
-
-This is my personal attempt to make a general usage bot
-
-  
+#  Twitch Chatbot
+This is my personal attempt to make a general usage twitch chat bot
 
 #  Setup
-
-  
-
 ##  **Pre-requisites**
 
 - Have the latest version of [Node](https://nodejs.org/en/download)
 
-  
-
 ##  Tutorial
-
-  
-
-Obs.: I made a video tutorial in case you want to watch it. Just click here (WIP)
-
-  
+Obs.: I made a video tutorial in case you want to watch it. Just click [here](https://youtu.be/KjFVCrE7vUg).
 
 ##  STEP-BY-STEP
 
@@ -33,7 +18,7 @@ Obs.: I made a video tutorial in case you want to watch it. Just click here (WIP
 
 3) Inside the root folder of the repository type `npm i` at the console.
 
-4) (Opcional) For an additional layer of safety create a file called `.env` at the root folder and copy the content from `.env.defaults` to it. (If you don't want to create this file, just use the `.env.defaults`)
+4) (Optional) For an additional layer of safety create a file called `.env` at the root folder and copy the content from `.env.defaults` to it. (If you don't want to create this file, just use the `.env.defaults`)
 
 5) At the `.env` file set the `CLIENT_ID` to your own client_id, set the `CLIENT_SECRET` to your own client_secret, and set the `USERNAME` to your bot's username.
 
@@ -53,4 +38,6 @@ http:/localhost:3000/?code=**4wlxvmfdq9egsokrv79o8des1vtzwz**&scope=chat%3Aread+
 
 7) With the code, set it in yout `.env` file as the `AUTHORIZATION_CODE` variable.
 
-8) Now you can run your bot, at the terminal run the command `node bot.js`.
+8) In the file `connect.js` at line 31 insert the name of your channel in place of gaudiot (remember to insert the name between __' '__ ).
+
+9) Now you can run your bot, at the terminal run the command `node bot.js`.
