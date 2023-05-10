@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "dev": "ts-node-dev --respawn --ignore-watch node_modules --transpile-only src/bot.ts",
-    "build": "npx tsc",
+    "build": "rm -rf ./build && npx tsc",
     "test": "test"
   },
   "repository": {
