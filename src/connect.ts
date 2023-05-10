@@ -1,9 +1,13 @@
-import tmi from 'tmi.js';
-import twitchApi from './services/twitchApi.js';
+import { client } from 'tmi.js';
+import twitchApi from './services/twitchApi';
+
+interface ITwitchTokenResponse {
+    access_token: string;
+}
 
 const connect = async () => {
     try{
-        const {data: tokenData} = await twitchApi.post('/token', {
+        const {data: tokenData} = await twitchApi.post<ITwitchTokenResponse>('/token', {
             client_id: process.env.CLIENT_ID,
             client_secret: process.env.CLIENT_SECRET,
             code: process.env.AUTHORIZATION_CODE,
@@ -32,9 +36,9 @@ const connect = async () => {
         ]
     };
 
-    const client = new tmi.client(opts);
+    const twitchClient = new client(opts);
 
-    return client;
+    return twitchClient;
 }
 
 export default connect;
