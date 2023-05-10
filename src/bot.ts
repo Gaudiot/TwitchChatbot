@@ -1,16 +1,22 @@
 import 'dotenv/config'
-import 'dotenv-defaults/config.js'
-import connect from './connect.js';
+import 'dotenv-defaults/config'
+import connect from './connect';
+import { Client } from 'tmi.js';
 
-// Create a client with our options
-const client = await connect();
+let client: Client;
+const startBot = async () => {
+  // Create a client with our options
+  client = await connect();
 
-// Register our event handlers (defined below)
-client.on('message', onMessageHandler);
-client.on('connected', onConnectedHandler);
+  // Register our event handlers (defined below)
+  client.on('message', onMessageHandler);
+  client.on('connected', onConnectedHandler);
+  
+  // Connect to Twitch:
+  client.connect();
+}
 
-// Connect to Twitch:
-client.connect();
+startBot();
 
 // Called every time a message comes in
 function onMessageHandler (target, context, msg, self) {
