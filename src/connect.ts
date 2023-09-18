@@ -1,5 +1,5 @@
 import tmi from 'tmi.js';
-import twitchApi from './services/twitchApi.js';
+import twitchApi from './services/twitchApi';
 
 const connect = async () => {
     try{
