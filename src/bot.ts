@@ -3,6 +3,8 @@ import 'dotenv-defaults/config'
 import connect from './connect';
 import { ChatUserstate } from 'tmi.js';
 
+const commandChar = '!';
+
 // Create a client with our options
 const execute = async () => { 
     const client = await connect();
@@ -15,11 +17,12 @@ const execute = async () => {
     client.connect();
     
     // Called every time a message comes in
-    function onMessageHandler (target: string, context: ChatUserstate, msg: string, self: boolean) {
-      if (self) { return; } // Ignore messages from the bot
+    function onMessageHandler (target: string, context: ChatUserstate, msg: string, self: boolean): void {
+      if (self) return; // Ignore messages from the bot
     
       // Remove whitespace from chat message
       const commandName = msg.trim();
+      if(commandName.charAt(0) != commandChar) return;
     
       // If the command is known, let's execute it
       if (commandName === '!dice') {
@@ -27,7 +30,7 @@ const execute = async () => {
         client.say(target, `You rolled a ${num}`);
         console.log(`* Executed ${commandName} command`);
       }else if(commandName === "!mir4"){
-        client.say(target, `Aqui está tudo funcionando`)
+        client.say(target, `Aqui está tudo funcionando ${context.username} or ${context['display-name']} or ${context.mod}`)
       } else {
         console.log(`* Unknown command ${commandName}`);
       }
