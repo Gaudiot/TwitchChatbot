@@ -1,16 +1,30 @@
 import {container} from 'tsyringe';
+
 import LuckCreate from './services/luckCreate';
+import LuckClose from './services/luckClose';
+import LuckWinner from './services/luckWinner';
 
 class LuckController{
     public create(message: string): void{
-        const parsedMessage = message.split(" ");
-        parsedMessage.splice(0, 2);
-
-        const newMessage = parsedMessage.join(" ");
+        const commandName = message.split(" ")[2];
 
         const luckCreate = container.resolve(LuckCreate);
 
-        luckCreate.execute(newMessage);
+        luckCreate.execute(commandName);
+    }
+
+    public close(message: string): void{
+        const commandName: string = message.split(" ")[2];
+
+        const luckClose = container.resolve(LuckClose);
+
+        luckClose.execute(commandName);
+    }
+
+    public winner(): void{
+        const luckWinner = container.resolve(LuckWinner);
+
+        luckWinner.execute();
     }
 }
 

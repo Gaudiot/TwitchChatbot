@@ -28,6 +28,15 @@ class FakeCommandsRepository implements ICommandRepository {
             this.commandsRepository.splice(commandIndex, 1);
         }
     }
+
+    async deactiveByName(commandName: string): Promise<Command | undefined> {
+        const command = this.commandsRepository.find((command) => command.name == commandName);
+
+        if(!command) return command;
+
+        command.deactivate();
+        return command;
+    }
 }
 
 export default FakeCommandsRepository;

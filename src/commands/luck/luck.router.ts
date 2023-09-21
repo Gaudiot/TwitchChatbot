@@ -9,8 +9,10 @@ function LuckRouter(message: string) {
             luckController.create(message);
             break;
         case 'close':
+            luckController.close(message);
             break;
         case 'winner':
+            luckController.winner();
             break;
         default:
             break;

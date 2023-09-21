@@ -1,12 +1,10 @@
 import {injectable, inject} from 'tsyringe';
 
-import LuckCommand from "../LuckCommand";
-
 import ICommandsRepository from "../../../database/ICommandsRepository";
 import BotService from "../../../services/botService";
 
 @injectable()
-class LuckCreate {
+class LuckClose {
     constructor(
         @inject('CommandsRepository')
         private commandsRepository: ICommandsRepository,
@@ -16,11 +14,9 @@ class LuckCreate {
     ){};
 
     public execute(commandName: string){
-        const command: LuckCommand = new LuckCommand(commandName);
-
-        this.commandsRepository.create(command);
-        this.botService.sendResponse(`Opened new draw, use !${commandName} to join.`);
+        this.commandsRepository.deactiveByName(commandName);
+        this.botService.sendResponse(`The ${commandName} draw was closed. Waiting for results.`);
     }
 }
 
-export default LuckCreate
+export default LuckClose

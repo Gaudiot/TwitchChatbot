@@ -4,6 +4,7 @@ export default class Command {
     private id: String;
     name: String;
     private type: 'MASTER' | 'MESSAGE' | 'COUNTER' | 'LUCKY'
+    private active: boolean = true;
 
     constructor(name: string, type: 'MASTER' | 'MESSAGE' | 'COUNTER' | 'LUCKY'){
         this.id = randomUUID();
@@ -13,5 +14,9 @@ export default class Command {
 
     public getType(): string{
         return this.type;
+    }
+
+    deactivate(){
+        this.active = false;
     }
 };
