@@ -1,13 +1,17 @@
 import { randomUUID } from "crypto";
 
 export default class Command {
-    id: String;
+    private id: String;
     name: String;
-    type: 'MASTER' | 'MESSAGE' | 'COUNTER'
+    private type: 'MASTER' | 'MESSAGE' | 'COUNTER' | 'LUCKY'
 
-    command(name: string, type: 'MASTER' | 'MESSAGE' | 'COUNTER'){
+    constructor(name: string, type: 'MASTER' | 'MESSAGE' | 'COUNTER' | 'LUCKY'){
         this.id = randomUUID();
         this.name = name;
         this.type = type;
     };
+
+    public getType(): string{
+        return this.type;
+    }
 };

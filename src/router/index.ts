@@ -1,21 +1,40 @@
-import { ChatUserstate } from "tmi.js";
+import { MasterRouter } from "../commands/router/routes";
+import ICommandsRepository from "../database/ICommandsRepository";
+import Command from "../database/entities/Command";
 
-export default function commandsRouter(target: string, context: ChatUserstate, msg: string): void{
-    let command: string = getCommandName(msg);
+import { container } from "tsyringe";
 
-    switch(command){
-        case "mir4":
-            asdf();
+export default async function commandsRouter(msg: string): Promise<void>{
+    const commandsRepository = container.resolve<ICommandsRepository>('CommandsRepository');
+
+    let commandName: string = getCommandName(msg);
+    const command: Command | undefined = await commandsRepository.findByName(commandName);
+
+    if(!command) return;
+
+    // 'MASTER' | 'MESSAGE' | 'COUNTER' | 'LUCKY'
+    switch(command.getType()){
+        case "MASTER":
+            // asdf();
+            MasterRouter(msg);
             break;
-        case "dice":
-            asdf();
+        case "MESSAGE":
+            // asdf();
+            break;
+        case "COUNTER":
+            // asdf();
+            break;
+        case "LUCKY":
+            // asdf();
+            break;
         default:
-            asdf();
+            // asdf();
+            break;
     }
 }
 
 function getCommandName(msg: string): string{
-    const command = msg.split("")[0].substring(1);
+    const command = msg.split(" ")[0];
 
     return command;
 }
