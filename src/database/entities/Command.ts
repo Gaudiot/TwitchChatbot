@@ -16,7 +16,11 @@ export default class Command {
         return this.type;
     }
 
-    deactivate(){
+    public isActive(): boolean{
+        return this.active;
+    }
+
+    public deactivate(): void{
         this.active = false;
     }
 };

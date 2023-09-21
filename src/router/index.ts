@@ -10,7 +10,7 @@ export default async function commandsRouter(msg: string): Promise<void>{
     let commandName: string = getCommandName(msg);
     const command: Command | undefined = await commandsRepository.findByName(commandName);
 
-    if(!command) return;
+    if(!command || !command.isActive()) return;
 
     // 'MASTER' | 'MESSAGE' | 'COUNTER' | 'LUCKY'
     switch(command.getType()){
