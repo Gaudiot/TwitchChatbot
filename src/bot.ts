@@ -35,7 +35,7 @@ const execute = async () => {
         target,
         context
       });
-
+      
       // Remove whitespace from chat message
       const commandName = msg.trim();
       if(commandName.charAt(0) != commandChar) return;
@@ -47,6 +47,7 @@ const execute = async () => {
     // Called every time the bot connects to Twitch chat
     function onConnectedHandler (addr: string, port: number) {
       console.log(`* Connected to ${addr}:${port}`);
+      botService.sendTargetlessResponse('bot is up and running');
     }
 }
 

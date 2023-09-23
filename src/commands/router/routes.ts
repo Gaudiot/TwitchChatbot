@@ -1,11 +1,11 @@
-import LuckRouter from "../luck/luck.router";
+import RaffleRouter from "../raffle/raffle.router";
 
 export function MasterRouter(message: string){
     let command: string = getCommandName(message);
     
     switch(command){
-        case "luck":
-            LuckRouter(message);
+        case "raffle":
+            RaffleRouter(message);
             break;
         case "tinder":
             break;
