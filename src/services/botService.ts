@@ -6,9 +6,12 @@ interface IBotServiceAttributes {
 }
 
 interface IUserInfo {
+    id: string;
+    userId?: string;
     username: string;
     mod: boolean;
     subscriber: boolean;
+    badges?: string;
 }
 
 class BotService {
@@ -32,11 +35,21 @@ class BotService {
         this.client.say(this.target, message);
     }
 
+    public sendTargetlessResponse(message: string): void{
+        if(!this.client){
+            throw new Error("Client com valor nulo");
+        }
+        this.client.say("#gaudiot", message);
+    }
+
     public getUserInfo(): IUserInfo{
         const userInfo: IUserInfo = {
+            id: this.context!.id ?? 'uuid',
             username: this.context!.username ?? 'indefinido',
             mod: this.context!.mod ?? false,
-            subscriber: this.context!.subscriber ?? false
+            subscriber: this.context!.subscriber ?? false,
+            badges: this.context!.badges?.broadcaster ?? "asdf",
+            userId: this.context!["user-id"],
         };
 
         return userInfo;

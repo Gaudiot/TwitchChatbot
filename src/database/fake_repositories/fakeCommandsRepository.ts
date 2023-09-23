@@ -4,7 +4,7 @@ import Command from "../entities/Command";
 class FakeCommandsRepository implements ICommandRepository {
     commandsRepository: Command[] = [
         new Command(
-            "luck",
+            "raffle",
             "MASTER"
         )
     ];

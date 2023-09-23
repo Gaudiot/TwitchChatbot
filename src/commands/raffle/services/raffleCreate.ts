@@ -1,12 +1,12 @@
 import {injectable, inject} from 'tsyringe';
 
-import LuckCommand from "../LuckCommand";
+import RaffleCommand from "../RaffleCommand";
 
 import ICommandsRepository from "../../../database/ICommandsRepository";
 import BotService from "../../../services/botService";
 
 @injectable()
-class LuckCreate {
+class RaffleCreate {
     constructor(
         @inject('CommandsRepository')
         private commandsRepository: ICommandsRepository,
@@ -16,11 +16,11 @@ class LuckCreate {
     ){};
 
     public execute(commandName: string){
-        const command: LuckCommand = new LuckCommand(commandName);
+        const command: RaffleCommand = new RaffleCommand(commandName);
 
         this.commandsRepository.create(command);
-        this.botService.sendResponse(`Opened new draw, use !${commandName} to join.`);
+        this.botService.sendResponse(`Opened new raffle, use !${commandName} to join.`);
     }
 }
 
-export default LuckCreate
+export default RaffleCreate
