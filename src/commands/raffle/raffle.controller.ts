@@ -5,11 +5,9 @@ import RaffleWinner from './services/raffleWinner';
 
 class RaffleController{
     public create(message: string): void{
-        const commandName = message.split(" ")[2];
-
         const raffleCreate = container.resolve(RaffleCreate);
 
-        raffleCreate.execute(commandName);
+        raffleCreate.execute(message);
     }
 
     public close(): void{
