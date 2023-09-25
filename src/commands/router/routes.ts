@@ -1,11 +1,14 @@
 import RaffleRouter from "../raffle/raffle.router";
 
-export function MasterRouter(message: string){
-    let command: string = getCommandName(message);
-    
-    switch(command){
+interface ICommand{
+    name: string;
+    args: string;
+}
+
+function CommandsRouter({name, args}: ICommand){
+    switch(name){
         case "raffle":
-            RaffleRouter(message);
+            RaffleRouter(args);
             break;
         case "tinder":
             break;
@@ -16,8 +19,4 @@ export function MasterRouter(message: string){
     }
 }
 
-function getCommandName(message: string): string{
-    const command = message.split(" ")[0];
-
-    return command;
-}
+export default CommandsRouter;
