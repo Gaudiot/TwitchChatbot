@@ -7,6 +7,10 @@ class RaffleController{
     public create(message: string): void{
         const raffleCreate = container.resolve(RaffleCreate);
 
+        const messageRegex = RegExp(/^([a-zA-Z0-9]+)$/);
+        const messageMatch = message.match(messageRegex);
+        if(!messageMatch) return;
+
         raffleCreate.execute(message);
     }
 
