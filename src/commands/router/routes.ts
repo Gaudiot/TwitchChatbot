@@ -1,3 +1,4 @@
+import CustomRouter from "../../created_commands/router/custom.routes";
 import RaffleRouter from "../raffle/raffle.router";
 
 interface ICommand{
@@ -15,6 +16,7 @@ function CommandsRouter({name, args}: ICommand){
         case "timer":
             break;
         default:
+            CustomRouter(name, args)
             break;
     }
 }

@@ -2,10 +2,14 @@ import {injectable, inject} from 'tsyringe';
 
 import BotService from "../../../services/botService";
 import IRaffle from '../../../misc/raffle/IRaffle';
+import ICommandsRepository from '../../../database/ICommandsRepository';
 
 @injectable()
 class RaffleWinner {
     constructor(
+        @inject('CommandsRepository')
+        private commandsRepository: ICommandsRepository,
+
         @inject('BotService')
         private botService: BotService,
 
@@ -13,10 +17,11 @@ class RaffleWinner {
         private raffle: IRaffle
     ){};
 
-    public execute(){
-        const isRaffleActive: boolean = this.raffle.isActive();
+    public async execute(){
+        const raffleName = this.raffle.getRaffleCode();
+        const isActive = await this.commandsRepository.isActiveByName(raffleName);
 
-        if(isRaffleActive){
+        if(isActive){
             const broadcaster: string = "gaudiot";
             this.botService.sendResponse(`${broadcaster} please close the raffle before choosing winner. Type (!raffle close)`);
         }else{

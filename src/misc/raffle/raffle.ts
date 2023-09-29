@@ -3,26 +3,32 @@ import IRaffle from "./IRaffle";
 class Raffle implements IRaffle{
     private raffleCode: string;
     private participants: string[] = [];
-    active: boolean = true;
+
+    private setRaffleName(raffleName: string){
+        this.raffleCode = raffleName;
+    }
 
     Raffle(raffleCode: string){
         this.raffleCode = raffleCode;
     };
 
+    setNewRaffle(raffleName: string): void {
+        this.setRaffleName(raffleName);
+        this.participants = [];
+    }
+
     getRaffleCode(): string{
         return this.raffleCode;
     }
 
-    isActive(): boolean {
-        return this.active;
-    }
-
-    addUser(username: string): boolean {
+    addUser(username: string, quantity: number = 1): boolean {
         const userIndex = this.participants.findIndex((user) => user == username);
 
         if(userIndex != -1) return false;
         
-        this.participants.push(username);
+        for(let counter = 0 ; counter < quantity ; counter++){
+            this.participants.push(username);
+        }
         return true;
     }
 
@@ -34,14 +40,10 @@ class Raffle implements IRaffle{
         return winner;
     }
 
-    activate(): boolean {
-        this.active = true;
-        return true;
+    activate(): void {
     }
 
-    deactivate(): boolean {
-        this.active = false;
-        return true;
+    deactivate(): void {
     }
 }
 

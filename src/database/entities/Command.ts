@@ -3,10 +3,10 @@ import { randomUUID } from "crypto";
 export default class Command {
     private id: String;
     name: String;
-    private type: 'MASTER' | 'MESSAGE' | 'COUNTER' | 'LUCKY'
+    private type: string
     private active: boolean = true;
 
-    constructor(name: string, type: 'MASTER' | 'MESSAGE' | 'COUNTER' | 'LUCKY'){
+    constructor(name: string, type: string){
         this.id = randomUUID();
         this.name = name;
         this.type = type;
