@@ -18,14 +18,11 @@ class RaffleClose {
     ){};
 
     public execute(){
-        const commandName = this.raffle.getRaffleCode();
+        const raffleName = this.raffle.getRaffleCode();
 
-        const isRaffleActive = this.raffle.active;
-
-        if(!isRaffleActive) return;
         this.raffle.deactivate();
 
-        this.commandsRepository.deactiveByName(commandName);
+        this.commandsRepository.deactiveByName(raffleName);
         this.botService.sendResponse(`The raffle was closed. Waiting for results.`);
     }
 }

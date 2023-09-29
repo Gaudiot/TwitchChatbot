@@ -1,12 +1,10 @@
 interface IRaffle {
-    active: boolean;
-
-    addUser(username: string): boolean;
+    addUser(username: string, quantity?: number): boolean;
+    setNewRaffle(raffleName: string): void;
     getRaffleCode(): string;
-    isActive(): boolean;
     pickWinner(): string;
-    activate(): boolean;
-    deactivate(): boolean;
+    activate(): void;
+    deactivate(): void;
 };
 
 export default IRaffle;

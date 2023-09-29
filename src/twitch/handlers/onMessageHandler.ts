@@ -9,6 +9,7 @@ const botService = container.resolve<BotService>('BotService');
 // Called every time a message comes in
 function onMessageHandler (target: string, context: ChatUserstate, message: string, self: boolean): void {
   if (self) return; // Ignore messages from the bot
+  message = message.toLowerCase();
 
   botService.setAttributes({
     target,

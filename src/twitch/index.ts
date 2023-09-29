@@ -10,6 +10,7 @@ import onSubscriptionHandler from "./handlers/onSubscriptionHandler";
 import onCheerHandler from "./handlers/onCheerHandler";
 import onSubgiftHandler from "./handlers/onSubgiftHandler";
 import onRaidedHandler from "./handlers/onRaidedHandler";
+import onRedeemHandler from "./handlers/onRedeemHandler";
 
 const botService = container.resolve<BotService>('BotService');
 
@@ -26,6 +27,7 @@ class Twitch{
         this.client.on('cheer', onCheerHandler);
         this.client.on('subgift', onSubgiftHandler);
         this.client.on('raided', onRaidedHandler);
+        this.client.on('redeem', onRedeemHandler)
         
         this.client.connect();
     }

@@ -30,12 +30,19 @@ class FakeCommandsRepository implements ICommandRepository {
     }
 
     async deactiveByName(commandName: string): Promise<Command | undefined> {
-        const command = this.commandsRepository.find((command) => command.name == commandName);
+        const command = await this.findByName(commandName);
 
         if(!command) return command;
 
         command.deactivate();
         return command;
+    }
+
+    async isActiveByName(commandName: string): Promise<boolean> {
+        const command = await this.findByName(commandName);
+        if(!command) return false;
+
+        return command.isActive();
     }
 }
 
