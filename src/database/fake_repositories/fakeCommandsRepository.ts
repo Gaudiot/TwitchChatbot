@@ -6,6 +6,10 @@ class FakeCommandsRepository implements ICommandRepository {
         new Command(
             "raffle",
             "MASTER"
+        ),
+        new Command(
+            "tinder",
+            "MASTER"
         )
     ];
 
