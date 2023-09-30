@@ -4,7 +4,7 @@ function TinderRouter(message: string) {
     const tinderController = new TinderController();
 
     const regexMatchTwoUsers = RegExp(/^(\w+)(?:\W+)(\w+)(?:.*)?/);
-    const matchTwoUsers = message.match(regexMatchTwoUsers);
+    const matchTwoUsers = message ? message.match(regexMatchTwoUsers) : false;
     if(matchTwoUsers){
         const [, username1, username2] = matchTwoUsers;
 
@@ -13,7 +13,7 @@ function TinderRouter(message: string) {
     }
     
     const regexMatchOneUser = RegExp(/^(\w+)(?:.*)?/);
-    const matchOneUser = message.match(regexMatchOneUser);
+    const matchOneUser = message ? message.match(regexMatchOneUser) : false;
     if(matchOneUser){
         const [, username1] = matchOneUser;
 

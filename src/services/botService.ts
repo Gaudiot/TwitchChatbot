@@ -7,17 +7,17 @@ interface IBotServiceAttributes {
 
 interface IUserInfo {
     id: string;
-    userId?: string;
+    broadcasterId?: string;
     username: string;
     mod: boolean;
     subscriber: boolean;
-    badges?: string;
 }
 
 class BotService {
     private client?: Client;
     private target?: string;
     private context?: ChatUserstate;
+    private chatters: string[] = [];
 
     public setClient(client: Client){
         this.client = client;
@@ -35,6 +35,20 @@ class BotService {
         this.client.say(this.target, message);
     }
 
+    public addChatter(username: string){
+        if(this.chatters.includes(username)) return;
+        
+        this.chatters.push(username);
+    }
+
+    public getRandomChatter(): string{
+        const quantity = this.chatters.length;
+        if(quantity == 0) return "empty";
+
+        const index = Math.floor(Math.random()*quantity);
+        return this.chatters[index];
+    }
+
     public sendTargetlessResponse(message: string): void{
         if(!this.client){
             throw new Error("Client com valor nulo");
@@ -48,8 +62,7 @@ class BotService {
             username: this.context!.username ?? 'indefinido',
             mod: this.context!.mod ?? false,
             subscriber: this.context!.subscriber ?? false,
-            badges: this.context!.badges?.broadcaster ?? "asdf",
-            userId: this.context!["user-id"],
+            broadcasterId: this.context!["user-id"],
         };
 
         return userInfo;

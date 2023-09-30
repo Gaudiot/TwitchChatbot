@@ -15,6 +15,7 @@ function onMessageHandler (target: string, context: ChatUserstate, message: stri
     target,
     context
   });
+  botService.addChatter(context.username!);
   
   const commandHandler = container.resolve(CommandHandler);
   commandHandler.execute(message);
