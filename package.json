@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/Gaudiot/TwitchChatbot#readme",
   "dependencies": {
+    "@twurple/api": "^7.0.2",
+    "@twurple/auth": "^7.0.2",
+    "@twurple/chat": "^7.0.2",
     "axios": "^1.3.6",
     "dotenv": "^16.0.3",
     "dotenv-defaults": "^5.0.2",

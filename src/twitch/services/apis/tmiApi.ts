@@ -1,4 +1,4 @@
-import twitchApi from "../../services/twitchApi";
+import twitchApi from "../../../services/twitchApi";
 
 interface IResponse {
     access_token: string;
@@ -10,7 +10,7 @@ interface IResponse {
 
 const CLIENT_ID = process.env.CLIENT_ID;
 
-class TwitchApi{
+class TmiApi{
     async getAuthCode(): Promise<string>{
         const { data } =  await twitchApi.get('/authorize', {
             params: {
@@ -44,4 +44,4 @@ class TwitchApi{
     }
 }
 
-export default TwitchApi;
+export default TmiApi;

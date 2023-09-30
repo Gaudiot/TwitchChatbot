@@ -27,7 +27,7 @@ class Twitch{
         this.client.on('cheer', onCheerHandler);
         this.client.on('subgift', onSubgiftHandler);
         this.client.on('raided', onRaidedHandler);
-        this.client.on('redeem', onRedeemHandler)
+        this.client.on('redeem', onRedeemHandler);
         
         this.client.connect();
     }

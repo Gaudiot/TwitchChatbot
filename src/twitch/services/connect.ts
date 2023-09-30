@@ -1,8 +1,8 @@
 import tmi from 'tmi.js';
-import TwitchApi from './twitchApi';
+import TmiApi from './apis/tmiApi';
 
 const connect = async () => {
-    const twitchApi = new TwitchApi();
+    const twitchApi = new TmiApi();
 
     // try{
     //     const accessToken = await twitchApi.getAccessToken();
