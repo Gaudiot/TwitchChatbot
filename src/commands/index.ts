@@ -2,6 +2,7 @@ import { inject, injectable } from "tsyringe";
 
 import ICommandsRepository from "../database/ICommandsRepository";
 import CommandsRouter from "./router/routes";
+import BotService from "../services/botService";
 
 interface ICommand{
     name: string;
@@ -12,8 +13,20 @@ interface ICommand{
 class CommandHandler{
     constructor(
         @inject('CommandsRepository')
-        private commandsRepository: ICommandsRepository
+        private commandsRepository: ICommandsRepository,
+
+        @inject('BotService')
+        private botService: BotService
     ){};
+
+    private async validateCommandExecution(commandName: string): Promise<boolean>{
+        const command = await this.commandsRepository.findByName(commandName);
+        if(!command) return false;
+
+        const { role } = this.botService.getUserInfo();
+        
+        return (command.isActive() && command.hasMinimumRole(role));
+    }
 
     async execute(commandToExecute: string | ICommand): Promise<void>{
         if(typeof commandToExecute == 'string'){
@@ -28,9 +41,8 @@ class CommandHandler{
                 args
             });
         }else{
-            const command = await this.commandsRepository.findByName(commandToExecute.name);
-
-            if(!command || !command.isActive()) return; // verify is command is able to run
+            const validCommand = await this.validateCommandExecution(commandToExecute.name);
+            if(!validCommand) return;
             
             CommandsRouter(commandToExecute);
         }

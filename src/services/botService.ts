@@ -1,4 +1,5 @@
 import { ChatUserstate, Client } from "tmi.js";
+import ChatRole from "../shared/enums/chatRoles.enum";
 
 interface IBotServiceAttributes {
     target: string;
@@ -11,6 +12,7 @@ interface IUserInfo {
     username: string;
     mod: boolean;
     subscriber: boolean;
+    role: ChatRole
 }
 
 class BotService {
@@ -56,6 +58,17 @@ class BotService {
         this.client.say("#gaudiot", message);
     }
 
+    private getUserChatRole(): ChatRole{
+        if(!this.context || !this.target) return ChatRole.Watcher;
+        const { subscriber, mod, username } = this.context;
+
+        if(this.target == `#${username}`) return ChatRole.Broadcaster;
+        if(mod) return ChatRole.Moderator;
+        if(subscriber) return ChatRole.Subscriber1;
+
+        return ChatRole.Watcher;
+    }
+
     public getUserInfo(): IUserInfo{
         const userInfo: IUserInfo = {
             id: this.context!.id ?? 'uuid',
@@ -63,6 +76,7 @@ class BotService {
             mod: this.context!.mod ?? false,
             subscriber: this.context!.subscriber ?? false,
             broadcasterId: this.context!["user-id"],
+            role: this.getUserChatRole()
         };
 
         return userInfo;
