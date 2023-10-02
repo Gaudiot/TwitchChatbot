@@ -1,3 +1,4 @@
+import ChatRole from "../../shared/enums/chatRoles.enum";
 import ICommandRepository from "../ICommandsRepository";
 import Command from "../entities/Command";
 
@@ -5,7 +6,8 @@ class FakeCommandsRepository implements ICommandRepository {
     commandsRepository: Command[] = [
         new Command(
             "raffle",
-            "MASTER"
+            "MASTER",
+            ChatRole.Broadcaster
         ),
         new Command(
             "tinder",
