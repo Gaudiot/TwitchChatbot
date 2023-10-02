@@ -1,23 +1,26 @@
 import RaffleRouter from "../raffle/raffle.router";
+import TinderRouter from "../tinder/tinder.router";
+import CustomRouter from "../../created_commands/router/custom.routes";
 
-export function MasterRouter(message: string){
-    let command: string = getCommandName(message);
-    
-    switch(command){
+interface ICommand{
+    name: string;
+    args: string;
+}
+
+function CommandsRouter({name, args}: ICommand){
+    switch(name){
         case "raffle":
-            RaffleRouter(message);
+            RaffleRouter(args);
             break;
         case "tinder":
+            TinderRouter(args);
             break;
         case "timer":
             break;
         default:
+            CustomRouter(name, args)
             break;
     }
 }
 
-function getCommandName(message: string): string{
-    const command = message.split(" ")[0];
-
-    return command;
-}
+export default CommandsRouter;

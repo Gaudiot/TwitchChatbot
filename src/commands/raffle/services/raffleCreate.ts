@@ -2,8 +2,10 @@ import {injectable, inject} from 'tsyringe';
 
 import RaffleCommand from "../RaffleCommand";
 
-import ICommandsRepository from "../../../database/ICommandsRepository";
 import BotService from "../../../services/botService";
+
+import ICommandsRepository from "../../../database/ICommandsRepository";
+import IRaffle from '../../../misc/raffle/IRaffle';
 
 @injectable()
 class RaffleCreate {
@@ -12,14 +14,19 @@ class RaffleCreate {
         private commandsRepository: ICommandsRepository,
 
         @inject('BotService')
-        private botService: BotService
+        private botService: BotService,
+
+        @inject('Raffle')
+        private raffle: IRaffle
     ){};
 
-    public execute(commandName: string){
-        const command: RaffleCommand = new RaffleCommand(commandName);
+    public execute(raffleName: string){
+        const command: RaffleCommand = new RaffleCommand(raffleName);
+
+        this.raffle.setNewRaffle(raffleName)
 
         this.commandsRepository.create(command);
-        this.botService.sendResponse(`Opened new raffle, use !${commandName} to join.`);
+        this.botService.sendResponse(`Opened new raffle, use !${raffleName} to join.`);
     }
 }
 

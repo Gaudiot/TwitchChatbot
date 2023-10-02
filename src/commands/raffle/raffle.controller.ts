@@ -5,11 +5,13 @@ import RaffleWinner from './services/raffleWinner';
 
 class RaffleController{
     public create(message: string): void{
-        const commandName = message.split(" ")[2];
-
         const raffleCreate = container.resolve(RaffleCreate);
 
-        raffleCreate.execute(commandName);
+        const messageRegex = RegExp(/^([a-zA-Z0-9]+)$/);
+        const messageMatch = message.match(messageRegex);
+        if(!messageMatch) return;
+
+        raffleCreate.execute(message);
     }
 
     public close(): void{
